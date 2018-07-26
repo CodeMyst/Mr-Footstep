@@ -57,6 +57,19 @@ namespace Mr_Footstep
         public void SetPositionToTile (Tile tile)
         {
             Position = Game1.CurrentRoom.GetTileWorldPosition (tile) + (new Vector2 (TopSprite.Width / 2, TopSprite.Height / 2) * new Vector2 (0.75f));
+
+            if (currentTile != null)
+            {
+                if (tile.X == currentTile.X + 1)
+                    rotation = 1.6f;
+                else if (tile.Y == currentTile.Y + 1)
+                    rotation = 3.1f;
+                else if (tile.Y == currentTile.Y - 1)
+                    rotation = 0f;
+                else if (tile.X == currentTile.X - 1)
+                    rotation = 4.7f;
+            }
+
             currentTile = tile;
         }
 
