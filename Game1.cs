@@ -1,6 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Reflection;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Mr_Footstep
 {
@@ -12,6 +16,8 @@ namespace Mr_Footstep
         private Player player;
 
         public static Room CurrentRoom;
+
+        private int roomIndex = 0;
 
         public Game1()
         {
@@ -25,16 +31,27 @@ namespace Mr_Footstep
             Window.Title = "Mr. Footstep";
         }
 
+        public void NextRoom ()
+        {
+            List<Type> allRoomTypes = Assembly.GetEntryAssembly ().GetTypes ().Where (t => t.Name.Contains ("Room")).ToList ();
+            allRoomTypes.RemoveAll (t => t.Name == "Room");
+
+            CurrentRoom = null;
+            CurrentRoom = (Room) Activator.CreateInstance (allRoomTypes [roomIndex], Content);
+            roomIndex++;
+            player.SetPositionToTile (CurrentRoom.GetTileAtWorldPosition (new Vector2 (0, 0)));
+        }
+
         protected override void Initialize()
         {
             base.Initialize();
 
-            CurrentRoom = new Room1 (Content);
             player = new Player ();
+            player.OnFinishLevel += NextRoom;
             player.ShoesSprite = Content.Load<Texture2D> ("Sprites/Shoes/Shoes1");
             player.TopSprite = Content.Load<Texture2D> ("Sprites/Player/Player");
 
-            player.SetPositionToTile (CurrentRoom.GetTileAtWorldPosition (new Vector2 (0, 0)));
+            NextRoom ();
         }
 
         protected override void LoadContent()

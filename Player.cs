@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -17,6 +18,8 @@ namespace Mr_Footstep
         private Direction direction = Direction.Down;
 
         private Tile currentTile;
+
+        public Action OnFinishLevel;
 
         public override void Update (float deltaTime)
         {
@@ -115,6 +118,14 @@ namespace Mr_Footstep
             }
 
             currentTile = tile;
+
+            if (tile.IsFinish)
+            {
+                currentTile = null;
+                direction = Direction.Down;
+
+                OnFinishLevel?.Invoke ();
+            }
         }
 
         public override void Draw (SpriteBatch spriteBatch)
