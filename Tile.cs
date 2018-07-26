@@ -8,6 +8,11 @@ namespace Mr_Footstep
     {
         public Texture2D Sprite;
         public Texture2D HoverSprite;
+        public Texture2D FootprintSprite;
+
+        private Footprint footprint;
+
+        private float footprintRotation = 0.0f;
 
         public int X;
         public int Y;
@@ -24,6 +29,31 @@ namespace Mr_Footstep
                 hover = true;
             else
                 hover = false;
+        }
+
+        public void PlaceFootprint (Footprint fp)
+        {
+            if (fp == null) return;
+
+            FootprintSprite = fp.Sprite;
+            
+            switch (fp.Direction)
+            {
+                case FootprintDirection.Down:
+                    footprintRotation = 3.1f;
+                    break;
+                case FootprintDirection.Right:
+                    footprintRotation = 1.6f;
+                    break;
+                case FootprintDirection.Up:
+                    footprintRotation = 0f;
+                    break;
+                case FootprintDirection.Left:
+                    footprintRotation = 4.7f;
+                    break;
+            }
+
+            footprint = fp;
         }
 
         public override void Draw (SpriteBatch spriteBatch)
@@ -52,6 +82,22 @@ namespace Mr_Footstep
                     0f,
                     Vector2.Zero,
                     new Vector2 (0.5f, 0.5f),
+                    SpriteEffects.None,
+                    0f
+                );
+            }
+
+            if (FootprintSprite != null)
+            {
+                spriteBatch.Draw
+                (
+                    FootprintSprite,
+                    Position + (new Vector2 (FootprintSprite.Width / 2, FootprintSprite.Height / 2) * 0.75f),
+                    null,
+                    Color.White,
+                    footprintRotation,
+                    new Vector2 (FootprintSprite.Width / 2, FootprintSprite.Height / 2),
+                    new Vector2 (0.75f),
                     SpriteEffects.None,
                     0f
                 );

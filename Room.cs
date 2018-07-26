@@ -10,7 +10,8 @@ namespace Mr_Footstep
         private const int Width = 12;
         private const int Height = 12;
 
-        private Tile [,] tiles = new Tile [Width, Height];
+        protected Tile [,] Tiles = new Tile [Width, Height];
+        protected Footprint [,] Footprints = new Footprint [Width, Height];
 
         public Room (ContentManager content)
         {
@@ -19,20 +20,29 @@ namespace Mr_Footstep
             for (int x = 0; x < Width; x++)
             for (int y = 0; y < Height; y++)
             {
-                tiles [x, y] = new Tile ();
-                tiles [x, y].Sprite = content.Load<Texture2D> ("Sprites/Tiles/Floor1");
-                tiles [x, y].HoverSprite = hoverSprite;
-                tiles [x, y].X = x;
-                tiles [x, y].Y = y;
-                int spriteWidth = tiles [x, y].Sprite.Width;
-                int spriteHeight = tiles [x, y].Sprite.Height;
-                tiles [x, y].Position = new Vector2 (x * spriteWidth / 2, y * spriteHeight / 2 );
+                Tiles [x, y] = new Tile ();
+                Tiles [x, y].Sprite = content.Load<Texture2D> ("Sprites/Tiles/Floor1");
+                Tiles [x, y].HoverSprite = hoverSprite;
+                Tiles [x, y].X = x;
+                Tiles [x, y].Y = y;
+                int spriteWidth = Tiles [x, y].Sprite.Width;
+                int spriteHeight = Tiles [x, y].Sprite.Height;
+                Tiles [x, y].Position = new Vector2 (x * spriteWidth / 2, y * spriteHeight / 2 );
+            }
+        }
+
+        protected void PlaceFootprints ()
+        {
+            for (int x = 0; x < Width; x++)
+            for (int y = 0; y < Height; y++)
+            {
+                Tiles [x, y].PlaceFootprint (Footprints [x, y]);
             }
         }
 
         public Vector2 GetTileWorldPosition (int x, int y)
         {
-            Tile tile = tiles [x, y];
+            Tile tile = Tiles [x, y];
 
             int spriteWidth = tile.Sprite.Width;
             int spriteHeight = tile.Sprite.Height;
@@ -50,8 +60,8 @@ namespace Mr_Footstep
             for (int x = 0; x < Width; x++)
             for (int y = 0; y < Height; y++)
             {
-                if (tiles [x, y].Rectangle.Contains (position))
-                    return tiles [x, y];
+                if (Tiles [x, y].Rectangle.Contains (position))
+                    return Tiles [x, y];
             }
 
             return null;
@@ -62,7 +72,7 @@ namespace Mr_Footstep
             for (int x = 0; x < Width; x++)
             for (int y = 0; y < Height; y++)
             {
-                tiles [x, y].Update (deltaTime);
+                Tiles [x, y].Update (deltaTime);
             }
         }
 
@@ -71,7 +81,7 @@ namespace Mr_Footstep
             for (int x = 0; x < Width; x++)
             for (int y = 0; y < Height; y++)
             {
-                tiles [x, y].Draw (spriteBatch);
+                Tiles [x, y].Draw (spriteBatch);
             }
         }
     }

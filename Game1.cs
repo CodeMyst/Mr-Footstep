@@ -29,7 +29,7 @@ namespace Mr_Footstep
         {
             base.Initialize();
 
-            CurrentRoom = new Room (Content);
+            CurrentRoom = new Room1 (Content);
             player = new Player ();
             player.ShoesSprite = Content.Load<Texture2D> ("Sprites/Shoes/Shoes1");
             player.TopSprite = Content.Load<Texture2D> ("Sprites/Player/Player");
