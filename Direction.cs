@@ -1,6 +1,6 @@
 namespace Mr_Footstep
 {
-    public enum FootprintDirection
+    public enum Direction
     {
         Up, Right, Down, Left
     }

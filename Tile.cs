@@ -41,16 +41,16 @@ namespace Mr_Footstep
             
             switch (fp.Direction)
             {
-                case FootprintDirection.Down:
+                case Direction.Down:
                     footprintRotation = 3.1f;
                     break;
-                case FootprintDirection.Right:
+                case Direction.Right:
                     footprintRotation = 1.6f;
                     break;
-                case FootprintDirection.Up:
+                case Direction.Up:
                     footprintRotation = 0f;
                     break;
-                case FootprintDirection.Left:
+                case Direction.Left:
                     footprintRotation = 4.7f;
                     break;
             }

@@ -5,9 +5,9 @@ namespace Mr_Footstep
     public class Footprint : Entity
     {
         public Texture2D Sprite;
-        public FootprintDirection Direction;
+        public Direction Direction;
 
-        public Footprint (Texture2D sprite, FootprintDirection direction)
+        public Footprint (Texture2D sprite, Direction direction)
         {
             Sprite = sprite;
             Direction = direction;

@@ -14,6 +14,8 @@ namespace Mr_Footstep
         private MouseState currState;
         private MouseState prevState;
 
+        private Direction direction = Direction.Down;
+
         private Tile currentTile;
 
         public override void Update (float deltaTime)
@@ -54,7 +56,34 @@ namespace Mr_Footstep
             if (tile.Y == currentTile.Y + 1 && tile.X == currentTile.X)
                 valid = true;
 
+            if (GetDirectionOfPossibleTile (tile) != tile.Footprint.Direction)
+                valid = false;
+
             return valid;
+        }
+
+        private Direction GetDirectionOfPossibleTile (Tile tile)
+        {
+            Direction dir = Direction.Down;
+
+            if (tile.X == currentTile.X + 1)
+            {
+                dir = Direction.Right;
+            }
+            else if (tile.Y == currentTile.Y + 1)
+            {
+                dir = Direction.Down;
+            }
+            else if (tile.Y == currentTile.Y - 1)
+            {
+                dir = Direction.Up;
+            }
+            else if (tile.X == currentTile.X - 1)
+            {
+                dir = Direction.Left;
+            }
+
+            return dir;
         }
 
         public void SetPositionToTile (Tile tile)
@@ -64,13 +93,25 @@ namespace Mr_Footstep
             if (currentTile != null)
             {
                 if (tile.X == currentTile.X + 1)
+                {
                     rotation = 1.6f;
+                    direction = Direction.Right;
+                }
                 else if (tile.Y == currentTile.Y + 1)
+                {
                     rotation = 3.1f;
+                    direction = Direction.Down;
+                }
                 else if (tile.Y == currentTile.Y - 1)
+                {
                     rotation = 0f;
+                    direction = Direction.Up;
+                }
                 else if (tile.X == currentTile.X - 1)
+                {
                     rotation = 4.7f;
+                    direction = Direction.Left;
+                }
             }
 
             currentTile = tile;
