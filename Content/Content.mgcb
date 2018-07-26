@@ -73,3 +73,10 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Prints/Print1.png
 
+#begin Fonts/Sunflower.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Sunflower.spritefont
+

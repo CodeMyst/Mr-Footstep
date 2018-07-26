@@ -19,6 +19,8 @@ namespace Mr_Footstep
 
         private int roomIndex = 0;
 
+        private SpriteFont font;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -52,6 +54,8 @@ namespace Mr_Footstep
             player.TopSprite = Content.Load<Texture2D> ("Sprites/Player/Player");
 
             NextRoom ();
+
+            font = Content.Load<SpriteFont> ("Fonts/Sunflower");
         }
 
         protected override void LoadContent()
@@ -80,6 +84,8 @@ namespace Mr_Footstep
 
             CurrentRoom.Draw (spriteBatch);
             player.Draw (spriteBatch);
+
+            spriteBatch.DrawString (font, "Shoes:", new Vector2 (10, 610), Color.Black);
 
             spriteBatch.End ();
 
