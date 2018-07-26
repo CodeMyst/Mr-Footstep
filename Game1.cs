@@ -11,7 +11,7 @@ namespace Mr_Footstep
 
         private Player player;
 
-        private Room room1;
+        public static Room CurrentRoom;
 
         public Game1()
         {
@@ -29,12 +29,12 @@ namespace Mr_Footstep
         {
             base.Initialize();
 
-            room1 = new Room (Content);
+            CurrentRoom = new Room (Content);
             player = new Player ();
             player.ShoesSprite = Content.Load<Texture2D> ("Sprites/Shoes/Shoes1");
             player.TopSprite = Content.Load<Texture2D> ("Sprites/Player/Player");
 
-            player.SetPositionToTile (room1.GetTileWorldPosition (0, 0));
+            player.SetPositionToTile (CurrentRoom.GetTileAtWorldPosition (new Vector2 (0, 0)));
         }
 
         protected override void LoadContent()
@@ -49,7 +49,7 @@ namespace Mr_Footstep
 
             float deltaTime = (float) gameTime.ElapsedGameTime.TotalSeconds;
 
-            room1.Update (deltaTime);
+            CurrentRoom.Update (deltaTime);
             player.Update (deltaTime);
 
             base.Update(gameTime);
@@ -61,7 +61,7 @@ namespace Mr_Footstep
 
             spriteBatch.Begin (samplerState: SamplerState.PointClamp);
 
-            room1.Draw (spriteBatch);
+            CurrentRoom.Draw (spriteBatch);
             player.Draw (spriteBatch);
 
             spriteBatch.End ();

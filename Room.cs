@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System.Linq;
 
 namespace Mr_Footstep
 {
@@ -21,6 +22,8 @@ namespace Mr_Footstep
                 tiles [x, y] = new Tile ();
                 tiles [x, y].Sprite = content.Load<Texture2D> ("Sprites/Tiles/Floor1");
                 tiles [x, y].HoverSprite = hoverSprite;
+                tiles [x, y].X = x;
+                tiles [x, y].Y = y;
                 int spriteWidth = tiles [x, y].Sprite.Width;
                 int spriteHeight = tiles [x, y].Sprite.Height;
                 tiles [x, y].Position = new Vector2 (x * spriteWidth / 2, y * spriteHeight / 2 );
@@ -35,6 +38,23 @@ namespace Mr_Footstep
             int spriteHeight = tile.Sprite.Height;
 
             return new Vector2 (x * spriteWidth / 2, y * spriteHeight / 2);
+        }
+
+        public Vector2 GetTileWorldPosition (Tile tile)
+        {
+            return GetTileWorldPosition (tile.X, tile.Y);
+        }
+
+        public Tile GetTileAtWorldPosition (Vector2 position)
+        {
+            for (int x = 0; x < Width; x++)
+            for (int y = 0; y < Height; y++)
+            {
+                if (tiles [x, y].Rectangle.Contains (position))
+                    return tiles [x, y];
+            }
+
+            return null;
         }
 
         public override void Update (float deltaTime)

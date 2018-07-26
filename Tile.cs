@@ -9,14 +9,18 @@ namespace Mr_Footstep
         public Texture2D Sprite;
         public Texture2D HoverSprite;
 
+        public int X;
+        public int Y;
+
+        public Rectangle Rectangle => new Rectangle ((int) Position.X, (int) Position.Y, 50, 50);
+
         private bool hover;
 
         public override void Update (float deltaTime)
         {
             MouseState ms = Mouse.GetState ();
-            Rectangle thisRect = new Rectangle ((int) Position.X, (int) Position.Y, 50, 50);
 
-            if (thisRect.Contains (ms.Position))
+            if (Rectangle.Contains (ms.Position))
                 hover = true;
             else
                 hover = false;
