@@ -39,6 +39,9 @@ namespace Mr_Footstep
         {
             bool valid = false;
 
+            if (tile.Footprint == null)
+                return false;
+
             if (tile.X == currentTile.X - 1 && tile.Y == currentTile.Y)
                 valid = true;
 

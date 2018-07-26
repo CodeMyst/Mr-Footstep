@@ -32,6 +32,7 @@ namespace Mr_Footstep
             Footprints [11, 10] = new Footprint (fp1, FootprintDirection.Down);
             Footprints [11, 11] = new Footprint (fp1, FootprintDirection.Down);
         
+            SetFinishTile (Tiles [11, 11]);
             PlaceFootprints ();
         }
     }

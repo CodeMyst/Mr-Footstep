@@ -40,6 +40,11 @@ namespace Mr_Footstep
             }
         }
 
+        protected void SetFinishTile (Tile tile)
+        {
+            tile.IsFinish = true;
+        }
+
         public Vector2 GetTileWorldPosition (int x, int y)
         {
             Tile tile = Tiles [x, y];

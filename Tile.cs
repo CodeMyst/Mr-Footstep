@@ -10,7 +10,9 @@ namespace Mr_Footstep
         public Texture2D HoverSprite;
         public Texture2D FootprintSprite;
 
-        private Footprint footprint;
+        public Footprint Footprint;
+
+        public bool IsFinish = false;
 
         private float footprintRotation = 0.0f;
 
@@ -53,17 +55,21 @@ namespace Mr_Footstep
                     break;
             }
 
-            footprint = fp;
+            Footprint = fp;
         }
 
         public override void Draw (SpriteBatch spriteBatch)
         {
+            Color color = Color.White;
+            if (IsFinish)
+                color = Color.Green;
+
             spriteBatch.Draw
             (
                 Sprite,
                 Position,
                 null,
-                Color.White,
+                color,
                 0f,
                 Vector2.Zero,
                 new Vector2 (0.5f, 0.5f),
