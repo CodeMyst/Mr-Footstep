@@ -13,11 +13,14 @@ namespace Mr_Footstep
 
         public Room (ContentManager content)
         {
+            Texture2D hoverSprite = content.Load<Texture2D> ("Sprites/Tiles/TileHover");
+
             for (int x = 0; x < Width; x++)
             for (int y = 0; y < Height; y++)
             {
                 tiles [x, y] = new Tile ();
                 tiles [x, y].Sprite = content.Load<Texture2D> ("Sprites/Tiles/Floor1");
+                tiles [x, y].HoverSprite = hoverSprite;
                 int spriteWidth = tiles [x, y].Sprite.Width;
                 int spriteHeight = tiles [x, y].Sprite.Height;
                 tiles [x, y].Position = new Vector2 (x * spriteWidth / 2, y * spriteHeight / 2 );
@@ -32,6 +35,15 @@ namespace Mr_Footstep
             int spriteHeight = tile.Sprite.Height;
 
             return new Vector2 (x * spriteWidth / 2, y * spriteHeight / 2);
+        }
+
+        public override void Update (float deltaTime)
+        {
+            for (int x = 0; x < Width; x++)
+            for (int y = 0; y < Height; y++)
+            {
+                tiles [x, y].Update (deltaTime);
+            }
         }
 
         public override void Draw (SpriteBatch spriteBatch)

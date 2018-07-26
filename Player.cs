@@ -11,6 +11,11 @@ namespace Mr_Footstep
 
         private float rotation = 3.1f;
 
+        public void SetPositionToTile (Vector2 tilePosition)
+        {
+            Position = tilePosition + (new Vector2 (TopSprite.Width / 2, TopSprite.Height / 2) * new Vector2 (0.75f));
+        }
+
         public override void Draw (SpriteBatch spriteBatch)
         {
             spriteBatch.Draw

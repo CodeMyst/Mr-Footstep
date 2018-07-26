@@ -34,7 +34,7 @@ namespace Mr_Footstep
             player.ShoesSprite = Content.Load<Texture2D> ("Sprites/Shoes/Shoes1");
             player.TopSprite = Content.Load<Texture2D> ("Sprites/Player/Player");
 
-            player.Position = room1.GetTileWorldPosition (0, 0) + (new Vector2 (player.TopSprite.Width / 2, player.TopSprite.Height / 2) * new Vector2 (0.75f));
+            player.SetPositionToTile (room1.GetTileWorldPosition (0, 0));
         }
 
         protected override void LoadContent()
@@ -49,6 +49,7 @@ namespace Mr_Footstep
 
             float deltaTime = (float) gameTime.ElapsedGameTime.TotalSeconds;
 
+            room1.Update (deltaTime);
             player.Update (deltaTime);
 
             base.Update(gameTime);

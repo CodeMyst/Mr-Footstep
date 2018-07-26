@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Mr_Footstep
@@ -6,6 +7,20 @@ namespace Mr_Footstep
     public class Tile : Entity
     {
         public Texture2D Sprite;
+        public Texture2D HoverSprite;
+
+        private bool hover;
+
+        public override void Update (float deltaTime)
+        {
+            MouseState ms = Mouse.GetState ();
+            Rectangle thisRect = new Rectangle ((int) Position.X, (int) Position.Y, 50, 50);
+
+            if (thisRect.Contains (ms.Position))
+                hover = true;
+            else
+                hover = false;
+        }
 
         public override void Draw (SpriteBatch spriteBatch)
         {
@@ -21,6 +36,22 @@ namespace Mr_Footstep
                 SpriteEffects.None,
                 0f
             );
+
+            if (hover)
+            {
+                spriteBatch.Draw
+                (
+                    HoverSprite,
+                    Position,
+                    null,
+                    Color.White,
+                    0f,
+                    Vector2.Zero,
+                    new Vector2 (0.5f, 0.5f),
+                    SpriteEffects.None,
+                    0f
+                );
+            }
         }
     }
 }
